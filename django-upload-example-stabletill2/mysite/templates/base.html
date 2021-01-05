@@ -1,0 +1,128 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}"> 
+  
+  <script src="https://code.jquery.com/jquery-2.1.0.js"></script> 
+  <title>{% block title %}My Site{% endblock %}</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    th, td {
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {background-color: 	#ccff99;}
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 4px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 20%;
+    }
+    </style>
+   
+</head>
+<!--  #5c848e-->
+<body>
+  <h1 style="color: white ;">Welcome!!</h1>
+  <script>
+    var offset=0;
+    var direction="right";
+    //to take to 0,0 coordinates below line is written
+    $("#heading").offset({ left: offset, top: offset });
+    function moveSquare()
+    {   if(direction === "right")
+        {
+            $("h1").offset({left : offset});
+            offset++;
+            
+            if(offset>1100)
+            {
+                offset=0;
+                direction="down";
+            }
+        }
+        else
+        { //if we want to move towards up use top property in offset function as argument but you decrement if you want 
+            //to move left then increment offset.
+    
+            $("h1").offset({top : offset});
+            offset--;
+            if(offset<0)
+            {
+                offset=0;
+                direction="right";
+            }
+        }   
+    };
+    //if click on header stop moving the header
+    /*var stop=setInterval(moveSquare,30);
+    function h(event){
+    
+        clearInterval(stop);
+    };
+    $("h1").click(h);
+    */
+    setInterval(moveSquare,10);  
+  </script>
+  <div
+    class="p-5 text-center bg-image"
+    style="
+      background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBS0TbZCCQGxypWGR0OiLMdKm9UMWDZy090g&usqp=CAU');
+      height: 1000px;
+    "
+  >
+  
+  <nav class="navbar navbar-expand-lg navbar-light mb-4" style="background-color:#DAA520">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home' %}">My Site</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <!-- IN app/urls.py the name is used as ons-->
+            <a class="nav-link" href="{% url 'ons' %}">Object and Scene Detection</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'im' %}">Image Moderation</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'class_book_list' %}">Model Forms Upload (CBV)</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-md-12">
+        <div class="card mb-4">
+          <div class="card-body">
+            {% block content %}
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </div>
+</body>
+</html>

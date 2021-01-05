@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Upload</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="document">
+    <button type="submit"  id="buttonjquery">Upload file</button>
+    
+  </form>
+  {% if url %}
+    <p>Uploaded file: <a href="{{ url }}">{{ url }}</a></p>
+  {% endif %}
+  {% if list_dict_cnp|length %} <!-- to check whelther dictinary is empty or not -->
+    
+<div style="overflow-x:auto;">
+  <h6> Image Moderation means whelther to check whelther the image is normal or it is containing any nudity in it</h6>
+    <script>
+      offset=0
+      var clickHandler=function(event){
+        $("h6").offset({left : offset});
+    };
+    $("#buttonjquery").click(clickHandler);
+    </script>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Confidence</th>
+          <th>ParentName</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for data in list_dict_cnp %}
+        <tr>
+          <td>{{ data.name }}</td>
+          <td>{{ data.confidence }}</td>
+          <td>{{ data.ParentName }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    
+  </div>
+  {% endif %}
+
+{% endblock %}

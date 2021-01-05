@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Upload</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="document">
+    <button type="submit">Upload file</button>
+    
+  </form>
+  {% if url %}
+    <p>Uploaded file: <a href="{{ url }}">{{ url }}</a></p>
+  {% endif %}
+  {% if list_dic_nc|length %} <!-- to check whelther dictinary is empty or not -->
+    
+<div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Confidence</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for data in list_dic_nc %}
+        <tr>
+          <td>{{ data.name }}</td>
+          <td>{{ data.confidence }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+
+{% endblock %}

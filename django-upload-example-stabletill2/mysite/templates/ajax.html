@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<title>Sample Page</title>
+
+<script>
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://api.openweathermap.org/data/2.5/weather?zip=95050&appid=APIKEY&units=imperial",
+  "method": "GET"
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+
+  var content = response.wind.speed;
+  $("#windSpeed").append(content);
+
+  var currentWeather = response.weather[0].main;
+  $("#currentWeather").append(currentWeather);
+
+});
+</script>
+</head>
+<body>
+<h1>Sample Page</h1>
+
+<div id="windSpeed">Wind speed: </div>
+<div id="currentWeather">Current weather conditions: </div>
+
+</body>
+</html>
